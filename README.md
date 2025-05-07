@@ -85,9 +85,6 @@ This creates an optimized build in the `build` folder that can be deployed to an
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 👥 Contributors
-
-- [Your Name](https://github.com/yourusername)
 
 ## 🙏 Acknowledgements
 
