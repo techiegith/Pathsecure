@@ -2,7 +2,11 @@ import React from 'react';
 import '../../components/components.css';
 import './Resources.css';
 
-const CaseStudiesPage: React.FC = () => {
+interface CaseStudiesPageProps {
+  onCaseStudyClick?: (id: number) => void;
+}
+
+const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onCaseStudyClick }) => {
   const caseStudies = [
     {
       id: 1,
@@ -33,6 +37,12 @@ const CaseStudiesPage: React.FC = () => {
       image: "/Case Studies/Image4.png"
     }
   ];
+
+  const handleCaseStudyClick = (id: number) => {
+    if (onCaseStudyClick) {
+      onCaseStudyClick(id);
+    }
+  };
 
   return (
     <div className="case-studies-page" style={{ backgroundColor: '#f5f5f7', minHeight: '100vh' }}>
@@ -141,6 +151,8 @@ const CaseStudiesPage: React.FC = () => {
               className={`flex flex-col md:flex-row bg-gray-100 rounded-xl overflow-hidden shadow-sm ${
                 index % 2 === 1 ? 'md:flex-row-reverse' : ''
               }`}
+              onClick={() => handleCaseStudyClick(study.id)}
+              style={{ cursor: onCaseStudyClick ? 'pointer' : 'default' }}
             >
               <div className="md:w-2/5">
                 <img 

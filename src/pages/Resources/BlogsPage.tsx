@@ -12,10 +12,14 @@ interface BlogPost {
   image: string;
 }
 
-const BlogsPage: React.FC = () => {
+interface BlogsPageProps {
+  onBlogClick?: (slug: string) => void;
+}
+
+const BlogsPage: React.FC<BlogsPageProps> = ({ onBlogClick }) => {
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 9;
+  const blogsPerPage = 12;
 
   // Sample blog posts data
   const blogPosts: BlogPost[] = [
@@ -127,6 +131,13 @@ const BlogsPage: React.FC = () => {
     setCurrentPage(pageNumber);
     // Scroll to top of the page
     window.scrollTo(0, 0);
+  };
+
+  // Handle blog click
+  const handleBlogClick = (slug: string) => {
+    if (onBlogClick) {
+      onBlogClick(slug);
+    }
   };
 
   // Featured blog post (first one)
@@ -266,14 +277,21 @@ const BlogsPage: React.FC = () => {
               <div style={{ fontSize: '14px', marginBottom: '8px' }}>{featuredPost.date}</div>
               <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '14px' }}>{featuredPost.title}</h2>
               <p style={{ fontSize: '16px', marginBottom: '16px', lineHeight: '1.6' }}>{featuredPost.excerpt}</p>
-              <a href={`/blog/${featuredPost.slug}`} style={{
-                display: 'inline-block',
-                color: 'white',
-                borderBottom: '1px solid white',
-                paddingBottom: '2px',
-                textDecoration: 'none',
-                fontWeight: '500'
-              }}>
+              <a 
+                href="#" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleBlogClick(featuredPost.slug);
+                }}
+                style={{
+                  display: 'inline-block',
+                  color: 'white',
+                  borderBottom: '1px solid white',
+                  paddingBottom: '2px',
+                  textDecoration: 'none',
+                  fontWeight: '500'
+                }}
+              >
                 Read More
               </a>
             </div>
@@ -287,7 +305,8 @@ const BlogsPage: React.FC = () => {
           gap: '30px',
           marginBottom: '50px'
         }}>
-          {currentPosts.slice(1).map(post => (
+          {/* Skip the first post since it's already displayed as the featured post */}
+          {currentPosts.filter(post => post.id !== featuredPost.id).map(post => (
             <div key={post.id} style={{ 
               backgroundColor: 'white',
               borderRadius: '8px',
@@ -343,13 +362,20 @@ const BlogsPage: React.FC = () => {
                 }}>
                   {post.excerpt.length > 100 ? `${post.excerpt.substring(0, 100)}...` : post.excerpt}
                 </p>
-                <a href={`/blog/${post.slug}`} style={{
-                  display: 'inline-block',
-                  color: '#3182CE',
-                  textDecoration: 'none',
-                  fontWeight: '500',
-                  fontSize: '15px'
-                }}>
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleBlogClick(post.slug);
+                  }}
+                  style={{
+                    display: 'inline-block',
+                    color: '#3182CE',
+                    textDecoration: 'none',
+                    fontWeight: '500',
+                    fontSize: '15px'
+                  }}
+                >
                   Read More
                 </a>
               </div>
@@ -357,71 +383,202 @@ const BlogsPage: React.FC = () => {
           ))}
         </div>
 
+        {/* Special display for the Financial Institutions post */}
+        {!currentPosts.some(post => post.id === 10) && (
+          <div style={{ 
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '30px',
+            marginBottom: '50px'
+          }}>
+            <div 
+              style={{ 
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)';
+                e.currentTarget.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+              }}
+              onClick={() => handleBlogClick(blogPosts[9].slug)}
+            >
+              <div style={{ 
+                height: '200px',
+                overflow: 'hidden'
+              }}>
+                <img 
+                  src={blogPosts[9].image} 
+                  alt={blogPosts[9].title}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </div>
+              <div style={{ padding: '20px' }}>
+                <div style={{ 
+                  fontSize: '14px', 
+                  color: '#718096', 
+                  marginBottom: '8px' 
+                }}>
+                  {blogPosts[9].date}
+                </div>
+                <h3 style={{ 
+                  fontSize: '18px', 
+                  fontWeight: 'bold', 
+                  color: '#2D3748', 
+                  marginBottom: '12px',
+                  lineHeight: '1.4'
+                }}>
+                  {blogPosts[9].title}
+                </h3>
+                <p style={{ 
+                  fontSize: '15px', 
+                  color: '#4A5568', 
+                  marginBottom: '16px',
+                  lineHeight: '1.6'
+                }}>
+                  {blogPosts[9].excerpt.length > 100 ? `${blogPosts[9].excerpt.substring(0, 100)}...` : blogPosts[9].excerpt}
+                </p>
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleBlogClick(blogPosts[9].slug);
+                  }}
+                  style={{
+                    display: 'inline-block',
+                    color: '#3182CE',
+                    textDecoration: 'none',
+                    fontWeight: '500',
+                    fontSize: '15px'
+                  }}
+                >
+                  Read More
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Pagination */}
         <div style={{ 
           display: 'flex', 
           justifyContent: 'center', 
           marginTop: '40px',
-          gap: '5px'
+          gap: '5px',
+          marginBottom: '40px'
         }}>
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
             style={{
-              padding: '8px 16px',
+              padding: '10px 20px',
               borderRadius: '4px',
-              border: '1px solid #E2E8F0',
-              backgroundColor: 'white',
+              border: 'none',
+              backgroundColor: '#f1f5f9',
               color: currentPage === 1 ? '#CBD5E0' : '#4A5568',
-              cursor: currentPage === 1 ? 'not-allowed' : 'pointer'
+              cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+              fontWeight: '500',
+              fontSize: '16px'
             }}
           >
             Prev
           </button>
           
-          {Array.from({ length: totalPages > 5 ? 5 : totalPages }, (_, i) => {
-            // Show first page, last page, current page and pages around current
-            let pageNumber = i + 1;
-            if (totalPages > 5) {
-              if (currentPage <= 3) {
-                pageNumber = i + 1;
-              } else if (currentPage >= totalPages - 2) {
-                pageNumber = totalPages - 4 + i;
-              } else {
-                pageNumber = currentPage - 2 + i;
-              }
-            }
-            
-            return (
-              <button
-                key={pageNumber}
-                onClick={() => handlePageChange(pageNumber)}
-                style={{
-                  padding: '8px 16px',
-                  borderRadius: '4px',
-                  border: '1px solid #E2E8F0',
-                  backgroundColor: currentPage === pageNumber ? '#3182CE' : 'white',
-                  color: currentPage === pageNumber ? 'white' : '#4A5568',
-                  cursor: 'pointer'
-                }}
-              >
-                {pageNumber}
-              </button>
-            );
-          })}
+          <button
+            onClick={() => handlePageChange(1)}
+            style={{
+              padding: '10px 20px',
+              borderRadius: '4px',
+              border: currentPage === 1 ? 'none' : '1px solid #E2E8F0',
+              backgroundColor: currentPage === 1 ? '#3B82F6' : 'white',
+              color: currentPage === 1 ? 'white' : '#4A5568',
+              cursor: 'pointer',
+              fontWeight: '500',
+              fontSize: '16px'
+            }}
+          >
+            1
+          </button>
           
-          {totalPages > 5 && <span style={{ alignSelf: 'center' }}>...</span>}
+          <button
+            onClick={() => handlePageChange(2)}
+            style={{
+              padding: '10px 20px',
+              borderRadius: '4px',
+              border: currentPage === 2 ? 'none' : '1px solid #E2E8F0',
+              backgroundColor: currentPage === 2 ? '#3B82F6' : 'white',
+              color: currentPage === 2 ? 'white' : '#4A5568',
+              cursor: 'pointer',
+              fontWeight: '500',
+              fontSize: '16px'
+            }}
+          >
+            2
+          </button>
+          
+          <button
+            onClick={() => handlePageChange(3)}
+            style={{
+              padding: '10px 20px',
+              borderRadius: '4px',
+              border: currentPage === 3 ? 'none' : '1px solid #E2E8F0',
+              backgroundColor: currentPage === 3 ? '#3B82F6' : 'white',
+              color: currentPage === 3 ? 'white' : '#4A5568',
+              cursor: 'pointer',
+              fontWeight: '500',
+              fontSize: '16px'
+            }}
+          >
+            3
+          </button>
+          
+          <span style={{ 
+            alignSelf: 'center', 
+            color: '#4A5568', 
+            fontSize: '20px',
+            fontWeight: '600',
+            padding: '0 10px'
+          }}>.....</span>
+          
+          <button
+            onClick={() => handlePageChange(7)}
+            style={{
+              padding: '10px 20px',
+              borderRadius: '4px',
+              border: currentPage === 7 ? 'none' : '1px solid #E2E8F0',
+              backgroundColor: currentPage === 7 ? '#3B82F6' : 'white',
+              color: currentPage === 7 ? 'white' : '#4A5568',
+              cursor: 'pointer',
+              fontWeight: '500',
+              fontSize: '16px'
+            }}
+          >
+            7
+          </button>
           
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
             style={{
-              padding: '8px 16px',
+              padding: '10px 20px',
               borderRadius: '4px',
-              border: '1px solid #E2E8F0',
-              backgroundColor: 'white',
-              color: currentPage === totalPages ? '#CBD5E0' : '#4A5568',
-              cursor: currentPage === totalPages ? 'not-allowed' : 'pointer'
+              border: 'none',
+              backgroundColor: '#3B82F6',
+              color: 'white',
+              cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+              fontWeight: '500',
+              fontSize: '16px'
             }}
           >
             Next

@@ -19,6 +19,8 @@ import WebinarsPage from './pages/Resources/WebinarsPage';
 import WebinarDetailPage from './pages/Resources/WebinarDetailPage';
 import WhitePapersPage from './pages/Resources/WhitePapersPage';
 import CaseStudiesPage from './pages/Resources/CaseStudiesPage';
+import BlogDetailPage from './pages/Resources/BlogDetailPage';
+import CaseStudyDetailPage from './pages/Resources/CaseStudyDetailPage';
 
 // Import Industries pages
 import { IndustriesPage } from './pages/Industries';
@@ -28,6 +30,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [webinarId, setWebinarId] = useState<number | null>(null);
   const [whitePaperId, setWhitePaperId] = useState<number | null>(null);
+  const [blogSlug, setBlogSlug] = useState<string | null>(null);
+  const [caseStudyId, setCaseStudyId] = useState<number | null>(null);
 
   // Function to render the current page based on the state
   const renderPage = () => {
@@ -39,7 +43,12 @@ function App() {
       case 'industries':
         return <IndustriesPage />;
       case 'resources':
-        return <BlogsPage />;
+        return <BlogsPage onBlogClick={(slug: string) => {
+          setBlogSlug(slug);
+          setCurrentPage('blog-detail');
+        }} />;
+      case 'blog-detail':
+        return <BlogDetailPage onBack={() => setCurrentPage('blogs')} />;
       case 'webinars':
         return <WebinarsPage onWebinarClick={(id: number) => {
           setWebinarId(id);
@@ -62,9 +71,17 @@ function App() {
           initialShowDetailPage={true}
         />;
       case 'case-studies':
-        return <CaseStudiesPage />;
+        return <CaseStudiesPage onCaseStudyClick={(id: number) => {
+          setCaseStudyId(id);
+          setCurrentPage('case-study-detail');
+        }} />;
+      case 'case-study-detail':
+        return <CaseStudyDetailPage onBack={() => setCurrentPage('case-studies')} />;
       case 'blogs':
-        return <BlogsPage />;
+        return <BlogsPage onBlogClick={(slug: string) => {
+          setBlogSlug(slug);
+          setCurrentPage('blog-detail');
+        }} />;
       case 'about':
         return <AboutUsPage />;
       case 'team':

@@ -1,23 +1,20 @@
 /* Add at the top of the file */
 .nav-items {
   overflow: visible !important;
-  min-height: 40px !important;
-  position: relative !important;
 }
 
 .header {
   overflow: visible !important;
-  min-height: 80px !important;
 }
 
 .nav {
   overflow: visible !important;
-  min-height: 60px !important;
 }
 
 /* Header and navigation */
 .header {
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -28,8 +25,6 @@
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  z-index: 100;
-  min-height: 80px;
 }
 
 /* Add this to remove the blue underline */
@@ -45,7 +40,6 @@
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
-  min-height: 50px;
 }
 
 /* Logo and tagline styles */
@@ -88,8 +82,7 @@
   justify-content: center;
   margin: 0;
   padding: 0 20px;
-  height: 40px;
-  position: static;
+  position: relative;
 }
 
 /* Remove any underlines */
@@ -112,12 +105,12 @@
 .nav-item {
   color: white;
   font-size: 16px;
+  position: relative;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
   padding: 5px 0;
-  height: 100%;
 }
 
 .nav-item.active {
@@ -162,27 +155,6 @@
 
 .button:hover {
   background-color: #2a6fe8;
-}
-
-/* Special handling for dropdown displays */
-.absolute {
-  position: absolute !important;
-}
-
-.top-full {
-  top: 100% !important;
-}
-
-.mt-1 {
-  margin-top: 0.25rem !important;
-}
-
-.z-50 {
-  z-index: 50 !important;
-}
-
-.w-48 {
-  width: 12rem !important;
 }
 
 /* Main content styling */
@@ -1823,9 +1795,4 @@ textarea.form-control {
   box-shadow: none !important;
   border: none !important;
   position: relative !important;
-}
-
-/* Dropdown styles */
-.dropdown-item:hover {
-  background-color: #f5f5f5;
 } 
