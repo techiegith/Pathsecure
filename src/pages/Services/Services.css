@@ -1,0 +1,97 @@
+/* Services Page Styles */
+.services-page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 0;
+}
+
+/* Removed services-content-area styles */
+
+/* Removed service-cards-container styles */
+
+.service-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.service-icon img {
+  width: 100%;
+  height: auto;
+}
+
+.service-card h3 {
+  color: #0B0D54;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.service-card p {
+  color: #4A5568;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.service-learn-more {
+  background-color: transparent;
+  color: #3182CE;
+  border: 1px solid #3182CE;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.service-learn-more:hover {
+  background-color: #3182CE;
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .services-header {
+    height: 250px;
+  }
+  
+  .services-header-overlay h1 {
+    font-size: 28px;
+  }
+  
+  .services-header-overlay p {
+    font-size: 16px;
+  }
+  
+  /* Removed service-cards-container media query */
+}
+
+@media (max-width: 480px) {
+  .services-header {
+    height: 200px;
+  }
+  
+  /* Removed services-content-area media query */
+  
+  /* Removed service-cards-container media query */
+}

@@ -1,0 +1,37 @@
+/* Resources Page Styles */
+.resources-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Resource card styles */
+.resource-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .resources-hero-section {
+    padding: 60px 20px;
+  }
+  
+  .resources-hero-section h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .resources-hero-section {
+    padding: 40px 20px;
+  }
+  
+  .resources-hero-section h1 {
+    font-size: 28px;
+  }
+} 
