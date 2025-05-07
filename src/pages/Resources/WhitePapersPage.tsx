@@ -519,19 +519,19 @@ const WhitePapersPage: React.FC<WhitePapersPageProps> = ({
   const whitepapers = [
     {
       id: 1,
-      imageSrc: '/white/Paper1.png',
+      imageSrc: '/White/Paper1.png',
       title: 'Generative AI in Business Operations: C-Suite Strategies for AI Adoption',
       description: 'Generative AI (GenAI) is transforming business operations, but without a clear strategy, enterprises risk inefficiencies, compliance hurdles, and missed opportunities.'
     },
     {
       id: 2,
-      imageSrc: '/white/Paper2.png',
+      imageSrc: '/White/Paper2.png',
       title: 'Building Resilient Cybersecurity Frameworks for Critical Infrastructure',
       description: 'Learn how to develop robust cybersecurity frameworks that protect critical infrastructure from evolving threats and vulnerabilities.'
     },
     {
       id: 3,
-      imageSrc: '/white/Paper3.png',
+      imageSrc: '/White/Paper3.png',
       title: 'Data Governance in the Cloud: Best Practices for Enterprise Security',
       description: 'This white paper outlines comprehensive strategies for maintaining data governance and security in cloud-based enterprise environments.'
     }
